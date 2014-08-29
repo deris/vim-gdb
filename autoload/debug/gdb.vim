@@ -172,13 +172,20 @@ function! s:execute_sync(command, endpatterns, ...) dict
       if has_key(hook, 'fail')
         call(hook['fail'])
       endif
+      " for debug
+      echom 'sync fail'
       break
     elseif result.done
       let res = [result.out, result.err]
       if has_key(hook, 'done')
         call(hook['done'], res)
       endif
+      " for debug
+      echom 'sync done'
       break
+    else
+      " for debug
+      echom 'sync idle'
     endif
     execute 'sleep ' . g:debug_gdb_retry_interval
     let cnt += 1
@@ -214,17 +221,17 @@ function! s:loop()
       call call(hook['fail'])
     endif
     " for debug
-    echom 'fail'
+    echom 'async fail'
   elseif result.done
     call remove(s:async_process, 0)
     if has_key(hook, 'done')
       call call(hook['done'], [result.out, result.err])
     endif
     " for debug
-    echom 'done'
+    echom 'async done'
   else
     " for debug
-    echom 'idle'
+    echom 'async idle'
   endif
 endfunction
 "}}}

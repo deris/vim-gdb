@@ -155,11 +155,6 @@ endfunction
 
 
 " for Vital ProcessManager2 {{{2
-function! s:plugin_process(process)
-  let a:process.execute_sync  = get(a:process, 'execute_sync', function('s:execute_sync'))
-  let a:process.execute_async = get(a:process, 'execute_async', function('s:execute_async'))
-endfunction
-
 function! s:execute_sync(command, endpatterns, ...) dict
   call self.reserve_writeln(a:command)
   call self.reserve_read(a:endpatterns)

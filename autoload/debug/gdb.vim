@@ -146,11 +146,7 @@ function! s:gdb.execute_async(command, endpatterns, ...) dict
     throw 'gdb is not running'
   endif
 
-  let process = self.process
-
-  call process.reserve_writeln(a:command)
-  call process.reserve_read(a:endpatterns)
-  call s:add_async_executing_process(process, get(a:000, 0, {}))
+  call self.process.execute_async(a:command, a:endpatterns, get(a:000, 0, {}))
 endfunction
 
 

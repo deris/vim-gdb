@@ -151,6 +151,8 @@ endfunction
 
 
 " for Vital ProcessManager2 {{{2
+" WANT: enable to add default hook
+" WANT: enable to add default endpatterns
 function! s:execute_sync(command, endpatterns, ...) dict
   call self.reserve_writeln(a:command)
   call self.reserve_read(a:endpatterns)
@@ -204,6 +206,7 @@ function! s:add_async_executing_process(process, hook)
   call add(s:async_process, [a:process, a:hook])
 endfunction
 
+" TODO: add retry count option
 function! s:loop()
   let [process, hook] = s:async_process[0]
   if process.is_idle()

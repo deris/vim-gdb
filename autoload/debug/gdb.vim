@@ -193,11 +193,9 @@ function! s:execute_sync(command, endpatterns, ...) dict
 endfunction
 
 function! s:execute_async(command, endpatterns, ...) dict
-  let process = self.process
-
-  call process.reserve_writeln(a:command)
-  call process.reserve_read(a:endpatterns)
-  call s:add_async_executing_process(process, get(a:000, 0, {}))
+  call self.reserve_writeln(a:command)
+  call self.reserve_read(a:endpatterns)
+  call s:add_async_executing_process(self, get(a:000, 0, {}))
 endfunction
 
 let s:async_process = []

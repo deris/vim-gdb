@@ -237,7 +237,9 @@ endfunction
 
 augroup my_debug_gdb_loop
   autocmd!
-  autocmd CursorHold,CursorHoldI * if !empty(s:async_process) | call s:loop() | call feedkeys('jk', 'n') | endif
+  autocmd CursorHold,CursorHoldI * if !empty(s:async_process) | call s:loop() | endif
+  autocmd CursorHold * call feedkeys("g\<ESC>", 'n')
+  autocmd CursorHoldI * call feedkeys("a\<BS>", 'n')
 augroup END
 
 call s:gdb.init()
